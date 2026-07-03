@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Search Results</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>📚 BookVerse</h1>
+
+<nav>
+
+<a href="/dashboard">Dashboard</a>
+
+<a href="/search">Search</a>
+
+<a href="/logout">Logout</a>
+
+</nav>
+
+</header>
+
+<h1 style="text-align:center;">Search Results</h1>
+
+<div class="results-grid" id="results_grid">
+
+{% for book in books %}
+
+<div class="result-card">
+
+{% if book.thumbnail %}
+
+<img src="{{ book.thumbnail }}">
+
+{% else %}
+
+<div class="no-cover">
+No Cover
+</div>
+
+{% endif %}
+
+<h3>{{ book.title }}</h3>
+
+<p>{{ book.author }}</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<div class="load-more">
+
+<button id="loadBtn">
+    Load More Books
+</button>
+
+</div>
+
+<script>
+    const loadBtn = document.getElementById("loadBtn");
+    const resultsGrid = document.getElementById("results_grid");
+    let currentPage = 1;
+    const genre = "{{ genre|default('') }}";
+
+    if (!genre) {
+        loadBtn.style.display = "none";
+    }
+
+    function createBookCard(book) {
+        const card = document.createElement("div");
+        card.className = "result-card";
+
+        if (book.thumbnail) {
+            const img = document.createElement("img");
+            img.src = book.thumbnail;
+            img.alt = book.title;
+            card.appendChild(img);
+        } else {
+            const noCover = document.createElement("div");
+            noCover.className = "no-cover";
+            noCover.textContent = "No Cover";
+            card.appendChild(noCover);
+        }
+
+        const title = document.createElement("h3");
+        title.textContent = book.title;
+        card.appendChild(title);
+
+        const author = document.createElement("p");
+        author.textContent = book.author;
+        card.appendChild(author);
+
+        return card;
+    }
+
+    async function loadMoreBooks() {
+        currentPage += 1;
+        loadBtn.disabled = true;
+        loadBtn.textContent = "Loading...";
+
+        try {
+            const response = await fetch(
+                `/load_more?genre=${encodeURIComponent(genre)}&page=${currentPage}`
+            );
+
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+
+            const data = await response.json();
+
+            if (!data.books || data.books.length === 0) {
+                loadBtn.textContent = "No more books";
+                loadBtn.disabled = true;
+                return;
+            }
+
+            for (const book of data.books) {
+                resultsGrid.appendChild(createBookCard(book));
+            }
+
+            loadBtn.disabled = false;
+            loadBtn.textContent = "Load More Books";
+        } catch (error) {
+            console.error("Failed to load more books:", error);
+            loadBtn.textContent = "Try again";
+            loadBtn.disabled = false;
+        }
+    }
+
+    loadBtn.addEventListener("click", loadMoreBooks);
+</script>
+
+{% if not books %}
+
+<h2 style="text-align:center;">
+No books found.
+</h2>
+
+{% endif %}
+
+</body>
+
+</html>

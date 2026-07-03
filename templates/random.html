@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Book Recommendation</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>📚 BookVerse</h1>
+
+<nav>
+
+<a href="/dashboard">Dashboard</a>
+
+<a href="/search">Search</a>
+
+<a href="/logout">Logout</a>
+
+</nav>
+
+</header>
+
+
+<div class="random-page">
+
+<h1>🎲 Book Recommendation Generator</h1>
+
+<p>Choose your preferences or let fate decide.</p>
+
+<form method="POST">
+
+<h3>Genre</h3>
+
+<select name="genre">
+
+<option value="">Any Genre</option>
+
+{% for g in genres %}
+
+<option value="{{ g|lower }}">{{ g }}</option>
+
+{% endfor %}
+
+</select>
+
+<br><br>
+
+<h3>Language</h3>
+
+<select name="language">
+
+<option value="">Any Language</option>
+
+<option value="eng">English</option>
+
+<option value="fre">French</option>
+
+<option value="ger">German</option>
+
+<option value="spa">Spanish</option>
+
+<option value="jpn">Japanese</option>
+
+</select>
+
+<br><br>
+
+<h3>Publication</h3>
+
+<label>
+
+<input type="radio"
+       name="publication"
+       value=""
+       checked>
+
+Any
+
+</label>
+
+<br>
+
+<label>
+
+<input type="radio"
+       name="publication"
+       value="classic">
+
+Classic (Before 2000)
+
+</label>
+
+<br>
+
+<label>
+
+<input type="radio"
+       name="publication"
+       value="modern">
+
+Modern (2000+)
+
+</label>
+
+<br><br>
+
+<h3>Book Length</h3>
+
+<p>🚧 Coming Soon</p>
+
+<h3>Series Type</h3>
+
+<p>🚧 Coming Soon</p>
+
+<h3>🚫 Block These Genres</h3>
+
+<p>Books with these genres will never be recommended, even with "Completely Random."</p>
+
+<div class="genre-checkbox-list">
+
+{% for g in genres %}
+
+<label class="genre-checkbox">
+    <input type="checkbox" name="exclude_genres" value="{{ g }}"
+    {% if g in selected_exclude %}checked{% endif %}>
+    {{ g }}
+</label>
+
+{% endfor %}
+
+</div>
+
+<br>
+
+<button
+type="submit"
+name="action"
+value="recommend">
+
+📖 Recommend Me
+
+</button>
+
+<br><br>
+
+<button
+type="submit"
+name="action"
+value="random">
+
+🎲 Completely Random
+
+</button>
+
+</form>
+
+{% if book %}
+
+<hr>
+
+<div class="recommend-card">
+
+{% if book.cover %}
+
+<img src="{{ book.cover }}">
+
+{% endif %}
+
+<h2>{{ book.title }}</h2>
+
+<p>
+
+<strong>Author:</strong>
+
+{{ book.author }}
+
+</p>
+
+<p>
+
+<strong>Language:</strong>
+
+{{ book.language }}
+
+</p>
+
+<p>
+
+<strong>Published:</strong>
+
+{{ book.year }}
+
+</p>
+
+<h3>📚 Summary</h3>
+
+<p>
+
+{{ book.description }}
+
+</p>
+
+{% if book.subjects %}
+
+<h3>🏷 Themes</h3>
+
+<ul>
+
+{% for subject in book.subjects %}
+
+<li>{{ subject }}</li>
+
+{% endfor %}
+
+</ul>
+
+{% endif %}
+
+<h3>💡 Why this recommendation?</h3>
+
+<p>
+
+{{ book.why }}
+
+</p>
+
+</div>
+
+{% elif searched %}
+
+<hr>
+
+<p style="color:red;">No book matched your filters. Try unblocking a genre or changing your preferences.</p>
+
+{% endif %}
+
+</div>
+
+</body>
+
+</html>

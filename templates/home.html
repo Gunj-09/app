@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>BookVerse</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>📚 BookVerse</h1>
+
+    <nav>
+
+        <a href="/">Home</a>
+
+        <a href="/login">Login</a>
+
+        <a href="/register">Register</a>
+
+    </nav>
+
+</header>
+
+<div class="hero">
+
+    <h2>Find Your Next Favorite Book</h2>
+
+    <p>Search thousands of books or let us surprise you.</p>
+
+    <br>
+
+    <a href="/search" class="button">🔍 Search Books</a>
+
+    <a href="/random" class="button">🎲 Surprise Me</a>
+
+</div>
+
+<div class="genres">
+
+<h2>Browse Genres</h2>
+
+<div class="genre-grid">
+
+<a href="/genre/fantasy" class="genre-card">
+
+<h3>🧙</h3>
+
+<h4>Fantasy</h4>
+
+<p>Magic • Dragons • Adventure</p>
+
+</a>
+
+<a href="/genre/romance" class="genre-card">
+
+<h3>💕</h3>
+
+<h4>Romance</h4>
+
+<p>Love • Drama • Feelings</p>
+
+</a>
+
+<a href="/genre/science_fiction" class="genre-card">
+
+<h3>🚀</h3>
+
+<h4>Sci-Fi</h4>
+
+<p>Future • Space • AI</p>
+
+</a>
+
+<a href="/genre/mystery" class="genre-card">
+
+<h3>🔎</h3>
+
+<h4>Mystery</h4>
+
+<p>Crime • Detectives • Secrets</p>
+
+</a>
+
+<a href="/genre/horror" class="genre-card">
+
+<h3>👻</h3>
+
+<h4>Horror</h4>
+
+<p>Ghosts • Fear • Thrills</p>
+
+</a>
+
+<a href="/genre/adventure" class="genre-card">
+
+<h3>⚔</h3>
+
+<h4>Adventure</h4>
+
+<p>Journey • Action • Survival</p>
+
+</a>
+
+<a href="/genre/humor" class="genre-card">
+
+<h3>😂</h3>
+
+<h4>Comedy</h4>
+
+<p>Funny • Lighthearted</p>
+
+</a>
+
+<a href="/genre/young_adult" class="genre-card">
+
+<h3>❤️</h3>
+
+<h4>Young Adult</h4>
+
+<p>Coming of Age</p>
+
+</a>
+
+<a href="/genre/self_help" class="genre-card">
+
+<h3>📖</h3>
+
+<h4>Self Help</h4>
+
+<p>Productivity • Growth</p>
+
+</a>
+
+</div>
+
+</div>
+
+<footer>
+
+    <p>BookVerse © 2026</p>
+
+</footer>
+
+</body>
+
+</html>

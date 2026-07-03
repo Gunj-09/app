@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Search Books</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>📚 BookVerse</h1>
+
+    <nav>
+
+        <a href="/dashboard">Dashboard</a>
+
+        <a href="/logout">Logout</a>
+
+    </nav>
+
+</header>
+
+<section class="search-hero">
+
+    <h1>Find Your Next Favorite Book</h1>
+
+    <p>Search millions of books by title or author.</p>
+
+    <form action="/search" method="POST">
+
+        <input
+            type="text"
+            name="query"
+            placeholder="Search books...">
+
+        <button type="submit">
+
+            🔍 Search
+
+        </button>
+
+        <div class="genre-filters">
+
+            <div class="genre-filter-group">
+
+                <h4>Show these genres</h4>
+
+                <div class="genre-checkbox-list">
+
+                {% for g in genres %}
+
+                    <label class="genre-checkbox">
+                        <input type="checkbox" name="include_genres" value="{{ g }}">
+                        {{ g }}
+                    </label>
+
+                {% endfor %}
+
+                </div>
+
+            </div>
+
+            <div class="genre-filter-group">
+
+                <h4>Don't show these genres</h4>
+
+                <div class="genre-checkbox-list">
+
+                {% for g in genres %}
+
+                    <label class="genre-checkbox">
+                        <input type="checkbox" name="exclude_genres" value="{{ g }}">
+                        {{ g }}
+                    </label>
+
+                {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</section>
+
+<section class="book-section">
+
+<h2>🔥 Weekly Top Picks</h2>
+
+<div class="book-grid">
+
+<div class="book-card">
+
+<img src="https://covers.openlibrary.org/b/id/10521270-L.jpg">
+
+<h3>Harry Potter</h3>
+
+</div>
+
+<div class="book-card">
+
+<img src="https://covers.openlibrary.org/b/id/14618255-L.jpg">
+
+<h3>The Hobbit</h3>
+
+</div>
+
+<div class="book-card">
+
+<img src="https://covers.openlibrary.org/b/id/11153268-L.jpg">
+
+<h3>Atomic Habits</h3>
+
+</div>
+
+<div class="book-card">
+
+<img src="https://covers.openlibrary.org/b/id/8226191-L.jpg">
+
+<h3>Percy Jackson</h3>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="book-section">
+
+<h2>⭐ Monthly Favorites</h2>
+
+<div class="book-grid">
+
+<div class="book-card">
+
+<img src="https://covers.openlibrary.org/b/id/12618288-L.jpg">
+
+<h3>The Alchemist</h3>
+
+</div>
+
+<div class="book-card">
+
+<img src="https://covers.openlibrary.org/b/id/5546156-L.jpg">
+
+<h3>1984</h3>
+
+</div>
+
+<div class="book-card">
+
+<img src="https://covers.openlibrary.org/b/id/12606506-L.jpg">
+
+<h3>Sherlock Holmes</h3>
+
+</div>
+
+<div class="book-card">
+
+<img src="https://covers.openlibrary.org/b/id/8231856-L.jpg">
+
+<h3>Pride & Prejudice</h3>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+BookVerse © 2026
+
+</footer>
+
+</body>
+
+</html>

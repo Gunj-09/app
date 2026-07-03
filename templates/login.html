@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+
+<center>
+
+<h2>Login</h2>
+
+<form action="/login" method="POST">
+
+    Username<br>
+    <input type="text" name="username"><br><br>
+
+    Password<br>
+    <input type="password" name="password"><br><br>
+
+    <input type="submit" value="Login"><br><br>
+
+    <!-- CAPTCHA BELOW LOGIN BUTTON -->
+    <h3>CAPTCHA</h3>
+
+    <img src="/captcha" width="180">
+
+    <input type="text"
+           name="captcha"
+           placeholder="Enter CAPTCHA"
+           required>
+
+    <br><br>
+
+    {% if error %}
+    <p style="color:red;">{{ error }}</p>
+    {% endif %}
+
+</form>
+
+<a href="/register">Create Account</a>
+
+</center>
+
+</body>
+</html>
